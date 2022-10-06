@@ -4,7 +4,7 @@ import requests
 import pandas as pd
 
 
-def cache_file(lr_path: str, fname: str, dir_: str = './__cache') -> str:
+def cache_file(folder: str, fname: str, dir_: str = './__cache') -> str:
     """Cache a in the given dir_ with the given fname and return the
     local path.
 
@@ -14,7 +14,7 @@ def cache_file(lr_path: str, fname: str, dir_: str = './__cache') -> str:
     """
     remote_path = ('https://raw.githubusercontent.com'
                    + '/ljk233/laughingrook-datasets/main/'
-                   + '/' + lr_path)
+                   + f'/{folder.rstrip("/")}/{fname}')
     local_path = f'{dir_}/{fname}'
     if fname not in os.listdir(dir_):
         r = requests.get(remote_path, allow_redirects=True)
